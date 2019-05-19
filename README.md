@@ -1,6 +1,5 @@
-## bbs system
-
-###页面部分
+## tsure bbs
+### 页面部分
 - 首页 index
 - 文章详情页 detail
 - 文章编辑页 edit
@@ -8,13 +7,15 @@
 
 ### 数据模型
 
-- 文章 post: content, user, ct, mt, 
-- 用户 user: name, email, passwd, avatar
-- 评论 comment:content, user_id, post_id
+- 文章 Post
+- 用户 User
+- 评论 Comment
+- 板块 Board
 
 ### 主要逻辑
 - 首页获取全部文章页
-- 在文章编辑页点击提交
-- 编辑文章
-- 删除文章
+- 文章的添加、删除
+- 用户和文章的关联、文章与板块、评论与用户和文章的关联
+- 文章对应板块
+
 

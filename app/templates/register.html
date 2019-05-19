@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>bbs club</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/cnode-index.css">
+    <style>
+
+        @font-face {
+            font-family: 'my-pixel';
+            src: url('/static/PressStart2P.ttf');
+        }
+
+        .logo-1 {
+            font-family: my-pixel;
+            font-size: 24px;
+            color: #21e2ff;
+        }
+
+        .logo-2 {
+            font-family: my-pixel;
+            font-size: 24px;
+            color: #0d7377;
+
+        }
+    </style>
+</head>
+<body>
+{% block navbar %}
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand" href="/">
+                    <span class="logo-1">T<span class="logo-2">Sure</span></span>
+                </a>
+                <form id="search_form" class="navbar-search" action="/search">
+                    <input type="text" id="q" name="q" class="search-query span3" value="" autocomplete="off">
+                </form>
+                <ul class="nav pull-right">
+                    <li><a href="/topic">首页</a></li>
+                    <li><a href="https://whochat.essayer.cc/">发现</a></li>
+                    {% if current_user %}
+                        <li><a href="/logout">退出登陆</a></li>
+
+                    {% else %}
+                        <li><a href="/signup">注册</a></li>
+                        <li><a href="/signin">登录</a></li>
+                    {% endif %}
+
+
+                </ul>
+                <a class="btn btn-navbar" id="responsive-sidebar-trigger">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block main %}
+    <div id="main">
+    <div id="sidebar">
+        <div class="panel">
+            <div class="header">
+                <span class="col_fade">公告板</span>
+            </div>
+            <div class="inner">
+                <p>TSure铺子：分享与收获宝藏的地方</p>
+
+                <p>在这里你可以：</p>
+                <ul>
+                    <li>分享你遇到的有趣事物</li>
+                    <li>记录生活点滴</li>
+                    <li>收获有用的知识</li>
+                    <li>和大家一起愉快玩耍</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+
+    <form class="form-horizontal" method="post" action="{{ url_for('.register') }}">
+        <div class="control-group">
+            <label class="control-label">用户名</label>
+            <div class="controls">
+                <input type="text" class="input-xlarge" name="username">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">密码</label>
+            <div class="controls">
+                <input type="password" class="input-xlarge" name="password">
+            </div>
+        </div>
+
+        <div class="control-group">
+            <input type="submit" class="span-primary controls" value="注册">
+        </div>
+
+
+
+    </form>
+{% endblock %}

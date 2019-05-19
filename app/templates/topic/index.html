@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TSure - 帖子区</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/lib/editor/editor.css">
+    <link rel="stylesheet" href="/static/lib/webuploader/webuploader.css">
+    <script src="/static/lib/jquery-3.0.0.min.js"></script>
+    <script src="/static/lib/markdownit.js"></script>
+    <script src="/static/lib/webuploader/webuploader.withoutimage.js"></script>
+    <script src="/static/lib/editor/editor.js"></script>
+    <script src="/static/lib/editor/ext.js"></script>
+
+    <link rel="stylesheet" href="/static/css/cnode-index.css">
+    <style>
+
+        @font-face {
+            font-family: 'my-pixel';
+            src: url('/static/PressStart2P.ttf');
+        }
+
+        .logo-1 {
+            font-family: my-pixel;
+            font-size: 24px;
+            color: #21e2ff;
+        }
+
+        .logo-2 {
+            font-family: my-pixel;
+            font-size: 24px;
+            color: #0d7377;
+        }
+
+        .topic-tab.current-tab {
+            background-color: #0d7377;
+        }
+
+        .create_topic_btn {
+            background-color: #0d7377;
+        }
+
+        .span-success{
+            background-color: #0d7377;
+        }
+        .span-success:hover{
+            background-color: #10c0ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand" href="/">
+                    <span class="logo-1">T<span class="logo-2">Sure</span></span>
+                </a>
+                <form id="search_form" class="navbar-search" action="/search">
+                    <input type="text" id="q" name="q" class="search-query span3" value="" autocomplete="off">
+                </form>
+                <ul class="nav pull-right">
+                    <li><a href="/topic">首页</a></li>
+                    <li><a href="/board/admin">板块</a></li>
+                    <li><a href="https://whochat.essayer.cc/">发现</a></li>
+                    {% if current_user %}
+                        <li><a href="/logout">退出登陆</a></li>
+
+                    {% else %}
+                        <li><a href="/signup">注册</a></li>
+                        <li><a href="/signin">登录</a></li>
+                    {% endif %}
+
+
+                </ul>
+                <a class="btn btn-navbar" id="responsive-sidebar-trigger">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+<div id="main">
+
+
+    <div id="sidebar">
+        <div class="panel">
+            <div class="inner">
+                <a href="/topic/new" class="create_topic_btn">
+                    <span class="span-success">发布话题</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="header">
+                <span class="col_fade">公告板</span>
+            </div>
+            <div class="inner">
+                <p>TSure铺子：分享与收获宝藏的地方</p>
+
+                <p>在这里你可以：</p>
+                <ul>
+                    <li>分享你遇到的有趣事物</li>
+                    <li>记录生活点滴</li>
+                    <li>收获有用的知识</li>
+                    <li>和大家一起愉快玩耍</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="content">
+        <div class="panel">
+            <div class="header">
+                <a href="/topic"
+                   class="topic-tab current-tab">
+                    全部
+                </a>
+
+                {% for b in bs %}
+                    <a href="/topic?board_name={{ b.name }}"
+                       class="topic-tab">
+                        {{ b.title }}
+                    </a>
+                {% endfor %}
+            </div>
+            <div class="inner post">
+                <div class="topic_list">
+                    {% for t in ms %}
+                        <div class="cell">
+                            <div class="topic_title_wrapper">
+                                <a class="topic_title" href="{{ url_for('topic.detail', id=t.id) }}">
+                                    {{ t.title }}
+                                </a>
+                                <span>{{ t.replies() | count }} / {{ t.views }}</span>
+                                {% if current_user.id == 6 %}
+                                <a class="topic_title" href="{{ url_for('topic.delete', id=t.id, token=token) }}">
+                                    删除
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    (function () {
+        var editor = new Editor();
+        editor.render($('.editor')[0]);
+    })();
+
+</script>
+</body>
+</html>
