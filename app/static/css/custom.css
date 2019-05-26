@@ -90,14 +90,18 @@ blockquote p {
 }
 
 .fa-user-plus,
-.fa-user {
+.fa-sign-in-alt {
     margin: 5px;
 }
 
-.nav-top-button {
+.nav-top-right {
     padding: 8px;
-    text-align: center;
     float: right;
+}
+
+.nav-top-button {
+    margin: 0 5px;
+    text-align: center;
 }
 
 #nav-bar nav {
@@ -249,10 +253,10 @@ footer {
     transition: all 0.5s ease;
 }
 
+/*
 #wrapper.toggled {
     padding-left: 220px;
-}
-
+} */
 #wrapper.toggled #sidebar-wrapper {
     width: 220px;
 }
@@ -507,4 +511,16 @@ footer {
 
 .dropdown-menu li {
     text-indent: 10px;
+}
+
+/* 表单 */
+/* .control-group{
+   text-align: center;
+}
+.controls{
+    margin: 0 30%;
+
+} */
+.form-group {
+    margin: 0 30%;
 }

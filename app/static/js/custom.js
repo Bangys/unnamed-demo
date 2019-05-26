@@ -10,10 +10,6 @@ var trigger = $('.hamburger'),
     overlay = $('.overlay'),
     isClosed = false;
 
-trigger.click(function() {
-    hamburger_cross();
-});
-
 function hamburger_cross() {
 
     if (isClosed == true) {
@@ -30,6 +26,10 @@ function hamburger_cross() {
 }
 
 $('[data-toggle="offcanvas"]').click(function() {
+    $('#wrapper').toggleClass('toggled');
+});
+
+$('.sidebar-brand').click(function() {
     $('#wrapper').toggleClass('toggled');
 });
 

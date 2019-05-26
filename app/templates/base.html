@@ -5,19 +5,23 @@
 
 <body>
     <div id="nav-top">
-        <a class="nav-top-button" href="#"><i class="fa fa-user-plus"></i><span>注册</span></a>
-        <a class="nav-top-button" href="#"><i class="fa fa-user"></i><span>登陆</span></a>
+        <button type="button" class="hamburger is-closed animated fadeInLeft" data-toggle="offcanvas">
+            <span class="hamb-top"></span>
+            <span class="hamb-middle"></span>
+            <span class="hamb-bottom"></span>
+        </button>
+
+        <div class="nav-top-right">
+            <a class="nav-top-button" href="#"><i class="fa fa-user-plus"></i><span>注册</span></a>
+            <a class="nav-top-button" href="/signin"><i class="fas fa-sign-in-alt"></i><span>登陆</span></a>
+        </div>
+
     </div>
 
     <div id="wrapper" class="toggled">
         {% include "nav.html" %}
 
         <div id="page-content-wrapper">
-            <button type="button" class="hamburger is-closed animated fadeInLeft" data-toggle="offcanvas">
-                <span class="hamb-top"></span>
-                <span class="hamb-middle"></span>
-                <span class="hamb-bottom"></span>
-            </button>
             <div class="container">
                 {% block content %}
                 {% endblock%}
@@ -29,13 +33,7 @@
         </div>
 
     </div>
-
-
-
-
-    </div>
-
-<script src='/static/js/custom.js'></script>
+    <script src='/static/js/custom.js'></script>
 </body>
 
 </html>
