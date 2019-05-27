@@ -4,19 +4,36 @@
 {% include "head.html" %}
 
 <body>
+
     <div id="nav-top">
         <button type="button" class="hamburger is-closed animated fadeInLeft" data-toggle="offcanvas">
             <span class="hamb-top"></span>
             <span class="hamb-middle"></span>
             <span class="hamb-bottom"></span>
         </button>
+        <div class="nav-msg">
+            {% for message in get_flashed_messages(with_categories=True) %}
+            <div class="alert alert-{{ message[0] }}">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{ message[1] }}
+            </div>
+            {% endfor %}
+
+        </div>
 
         <div class="nav-top-right">
-            <a class="nav-top-button" href="#"><i class="fa fa-user-plus"></i><span>注册</span></a>
-            <a class="nav-top-button" href="/signin"><i class="fas fa-sign-in-alt"></i><span>登陆</span></a>
+            {% if user %}
+            <a class="nav-top-button" href="#"><i class="fab fa-dribbble"></i><span>我的</span></a>
+            <a class="nav-top-button" href="/logout"><i class="fas fa-sign-out-alt"></i><span>退出登陆</span></a>
+            {% else %}
+            <a class="nav-top-button" href="/register"><i class="fa fa-user-plus"></i><span>注册</span></a>
+            <a class="nav-top-button" href="/login"><i class="fas fa-sign-in-alt"></i><span>登陆</span></a>
+            {% endif %}
+
         </div>
 
     </div>
+
 
     <div id="wrapper" class="toggled">
         {% include "nav.html" %}
@@ -33,6 +50,7 @@
         </div>
 
     </div>
+    <script src='/static/js/common.js'></script>
     <script src='/static/js/custom.js'></script>
 </body>
 

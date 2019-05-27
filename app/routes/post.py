@@ -37,7 +37,7 @@ def index():
     if u is not None:
         csrf_tokens['token'] = u.id
     bs = Board.query.all()
-    return render_template("topic/index.html", ms=posts, token=token, bs=bs, board_name=board_name, current_user=u)
+    return render_template("index.html", ms=posts, token=token, bs=bs, board_name=board_name, current_user=u)
 
 
 @main.route('/<int:id>')

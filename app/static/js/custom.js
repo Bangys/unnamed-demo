@@ -33,10 +33,25 @@ $('.sidebar-brand').click(function() {
     $('#wrapper').toggleClass('toggled');
 });
 
+function validate() {
+    var pw1 = e("#pw-1").value;
+    var pw2 = e("#pw-2").value;
+    if (pw1 == pw2) {
+        e("#password-msg").innerHTML = "";
+        e("#submit").disabled = false;
+    } else {
+        e("#password-msg").innerHTML = "<font color='red'>两次密码不相同</font>";
+        e("#submit").disabled = true;
+    }
+}
+
+
+
 
 var __main = function() {
     initedEditor()
 }
+
 
 $(document).ready(function() {
     __main()

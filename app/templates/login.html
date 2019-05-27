@@ -1,17 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
 
-{% for message in get_flashed_messages(with_categories=True) %}
-<div class="alert alert-{{ message[0] }}">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    {{ message[1] }}
-</div>
-
-{% endfor %}
-
 <div class="row">
     <form class="form-group" method="post" action="{{ url_for('.login') }}">
-        <h1 class="control-label">登陆TSure</h1>
+        <h1 class="control-label">登录TSure</h1>
         <div class="control-group">
             <label class="control-label">用户名</label>
             <div class="controls">
@@ -24,10 +16,23 @@
                 <input type="password" class="form-control" name="password">
             </div>
         </div>
-        <div class="control-group">
-            <input type="submit" class="btn btn-primary" value="登陆">
-        </div>
+        <button type="submit" class="btn btn-primary">登录</button>
+
+            <input type="checkbox" value="1" name="remember_me">
+            记住我
+
     </form>
+
+    <div class="form-helper">
+        <span class="form-helper-item">
+            首次使用 TSure 吗?
+            <a href="/">现在注册 »</a>
+        </span>
+        <span class="form-helper-item">
+            忘记了密码?
+            <a href="/account/complete">找回你的密码 »</a>
+        </span>
+    </div>
 </div>
 
 {% endblock %}

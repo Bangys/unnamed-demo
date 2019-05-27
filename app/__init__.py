@@ -25,13 +25,13 @@ def create_app(config_name):
     # 注册蓝图
     # 有一个 url_prefix 可以用来给蓝图中的每个路由加一个前缀
     from app.routes.index import main as index_routes
-    from app.routes.post import main as topic_routes
-    from app.routes.comment import main as reply_routes
+    from app.routes.post import main as post_routes
+    from app.routes.comment import main as comment_routes
     from app.routes.board import main as board_routes
 
     app.register_blueprint(index_routes)
-    app.register_blueprint(topic_routes, url_prefix='/topic')
-    app.register_blueprint(reply_routes, url_prefmderix='/reply')
+    app.register_blueprint(post_routes, url_prefix='/post')
+    app.register_blueprint(comment_routes, url_prefmderix='/comment')
     app.register_blueprint(board_routes, url_prefix='/board')
 
     return app

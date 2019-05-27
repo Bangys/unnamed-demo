@@ -23,59 +23,55 @@ def current_user():
 
 
 """
-用户在这里可以
-    访问首页
-    注册
-    登录
-
 用户登录后, 会写入 session, 并且定向到 /profile
 """
 
 
 @main.route("/")
 def index():
-    u = current_user()
-    return redirect(url_for('topic.index'))
+    user = current_user()
+    return render_template("index.html", user=user)
 
 
-@main.route("/signup", methods=['GET'])
-def signup():
-    return render_template("register.html")
-
-
-@main.route("/signin", methods=['GET'])
-def signin():
-    return render_template("login.html")
-
-
-@main.route("/register", methods=['POST'])
+@main.route("/register", methods=['GET', 'POST'])
 def register():
-    form = request.form
-    # 用类函数来判断
-    u = User.register(form)
-    return redirect(url_for('.index'))
+    if request.method == 'POST':
+        form = request.form
+        u = User.register(form)
+        if u is None:
+            flash('用户名已存在', 'danger')
+            return render_template("register.html")
+        flash('注册成功', 'success')
+        session['user_id'] = u.id
+        return redirect(url_for('.index'))
+
+    else:
+        return render_template("register.html")
+
+
+@main.route("/login", methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        form = request.form
+        u = User.validate_login(form)
+        if u is None:
+            flash('账号密码错误', 'danger')
+            return redirect(url_for('.login'))
+        else:
+            # session 中写入 user_id
+            session['user_id'] = u.id
+            # 设置 cookie 有效期
+            session.permanent = True
+            flash('登录成功', 'success')
+            return redirect(url_for('board.index'))
+    else:
+        return render_template("login.html")
 
 
 @main.route("/logout", methods=['GET'])
 def logout():
     session['user_id'] = ""
     return redirect(url_for('.index'))
-
-
-@main.route("/login", methods=['POST'])
-def login():
-    form = request.form
-    u = User.validate_login(form)
-    if u is None:
-        # 转到 topic.index 页面
-        flash('登陆失败')
-        return redirect(url_for('.signin'))
-    else:
-        # session 中写入 user_id
-        session['user_id'] = u.id
-        # 设置 cookie 有效期为 永久
-        session.permanent = True
-        return redirect(url_for('topic.index'))
 
 
 @main.route('/profile')

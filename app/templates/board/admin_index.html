@@ -1,15 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>board admin</title>
-</head>
-<body>
-    <form action="/board/add" method="post">
-        <input name="title">
-        <input name="name" placeholder="只能是英文或数字">
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="board-list-all">
+        当前共 {{ bs_all | length }} 个板块
         <br>
-        <button>add</button>
+        {% for item in bs_all %}
+        <span>
+            板块名：{{ item.name }} / tag：{{ item.title }}
+        </span>
+        <br>
+        {% endfor %}
+    </div>
+    <form class="form-group" action="/board/add" method="post">
+
+        <div class="control-group">
+            <label class="control-label">tag</label>
+            <div class="controls">
+                <input type="text" class="form-control" name="title" required>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">版块名</label>
+            <div class="controls">
+                <input type="text" class="form-control" name="name" required>
+            </div>
+        </div>
+        <br>
+        <button class="btn">添加</button>
     </form>
-</body>
-</html>
+</div>
+
+
+
+
+
+{% endblock %}

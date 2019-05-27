@@ -53,10 +53,6 @@ body {
     height: 100%;
 }
 
-.scrollplace {
-    margin-right: 10px;
-}
-
 a {
     color: rgba(255, 255, 255, 0.88);
 }
@@ -89,8 +85,7 @@ blockquote p {
     z-index: 1;
 }
 
-.fa-user-plus,
-.fa-sign-in-alt {
+.nav-top-button i {
     margin: 5px;
 }
 
@@ -133,6 +128,22 @@ blockquote p {
     border-top: 1.5px solid #666;
     margin: 0px 33%;
 }
+
+.nav-msg {
+    position: fixed;
+    width: 40%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.alert {
+    padding: 7px;
+    border: 1px solid rgba(0, 0, 0, 0.88);
+    border-radius: 4px;
+}
+
 
 /* 首页部分 */
 #middle {
@@ -514,13 +525,75 @@ footer {
 }
 
 /* 表单 */
-/* .control-group{
-   text-align: center;
+.row {
+    margin: 12% 20%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: white;
+    border-radius: 1px;
 }
-.controls{
-    margin: 0 30%;
 
-} */
-.form-group {
-    margin: 0 30%;
+.form-control {
+    display: inline-block;
+    width: 100%;
+    border-radius: 1px;
+}
+
+.form-group,
+.form-helper-item {
+    padding: 1% 10%;
+    display: block;
+}
+
+.form-group h1 {
+    color: rgba(0, 0, 0, 0.88);
+    margin-top: 40px;
+}
+
+.control-group {
+    margin: 3% auto;
+}
+
+.controls {
+    width: 50%;
+}
+
+.btn-primary {
+    border: none;
+    background-color: #1da1f2;
+    border-color: #1da1f2;
+    border-radius: 65px;
+    transition: box-shadow .15s ease-in-out;
+}
+
+.btn-primary:hover {
+    background-color: #006dbf;
+    border-color: #006dbf;
+}
+
+.btn-primary:focus,
+.btn-primary:active {
+    border-color: #fff !important;
+    outline: none !important;
+    box-shadow: 0 0 0 1px #fff, 0 0 0 5px #71c9f8;
+    color: #fff;
+    transition: box-shadow .15s ease-in-out;
+}
+
+.form-helper {
+    margin: 0 !important;
+    background-color: #f5f8fa;
+    padding: 1% auto;
+    font-size: 14px;
+}
+
+.form-helper-item a {
+    color: #52a2f2;
+}
+
+.color {
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-image: -webkit-linear-gradient(left, #e74c3c 20%, #f4d03f 40%, #2ecc71 60%, #5dade2 80%, #a569bd 100%);
+    background-image: linear-gradient(to right, #e74c3c 20%, #f4d03f 40%, #2ecc71 60%, #5dade2 80%, #a569bd 100%);
 }
