@@ -48,6 +48,7 @@ function validate() {
 
 
 
+
 var __main = function() {
     initedEditor()
 }

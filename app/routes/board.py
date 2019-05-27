@@ -7,11 +7,11 @@ from flask import (
     flash)
 
 from app import db
-from app.routes import *
 
 from app.models.board import (
     Board,
 )
+from app.routes import current_user
 from utils import log
 
 main = Blueprint('board', __name__)

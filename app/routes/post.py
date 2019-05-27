@@ -15,7 +15,7 @@ from app.models.post import Post
 from app.models.board import Board
 from utils import log
 
-main = Blueprint('topic', __name__)
+main = Blueprint('post', __name__)
 
 import uuid
 
@@ -37,7 +37,7 @@ def index():
     if u is not None:
         csrf_tokens['token'] = u.id
     bs = Board.query.all()
-    return render_template("index.html", ms=posts, token=token, bs=bs, board_name=board_name, current_user=u)
+    return render_template("post/post_index.html", ms=posts, token=token, bs=bs, board_name=board_name, current_user=u)
 
 
 @main.route('/<int:id>')
@@ -51,8 +51,8 @@ def detail(id):
     board = Board.query.filter_by(id=post.board_id).first()
     author = User.query.filter_by(id=post.user_id).first()
     date = post.ct
-    # 传递 topic 的所有 reply 到 页面中
-    return render_template("topic/detail.html", post=post, board=board, author=author, date=date, current_user=u)
+    # 传递 post 的所有 reply 到 页面中
+    return render_template("post/detail.html", post=post, board=board, author=author, date=date, current_user=u)
 
 
 @main.route("/add", methods=["POST"])
@@ -91,4 +91,4 @@ def new():
         flash('需要进行登陆')
         return redirect(url_for('index.signin'))
     bs = Board.query.all()
-    return render_template("topic/new.html", bs=bs)
+    return render_template("post/new.html", bs=bs)

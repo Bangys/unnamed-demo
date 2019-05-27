@@ -3,16 +3,6 @@ from datetime import datetime
 
 from app import db
 
-from app.models import Model
-# class Board(Model):
-#     def __init__(self, form):
-#         self.id = None
-#         self.title = form.get('title', '')
-#         self.name = form.get('name', '')
-#         self.ct = int(time.time())
-#         self.ut = self.ct
-
-
 
 
 class Board(db.Model):

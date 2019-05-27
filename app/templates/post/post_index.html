@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="post_content">
+
+    <div class="content_board">
+        <a href="/post" class="topic-tab current-tab">
+            全部
+        </a>
+
+        {% for b in bs %}
+        <a href="/post?board_name={{ b.name }}" class="topic-tab">
+            {{ b.title }}
+        </a>
+        {% endfor %}
+    </div>
+
+    <br>
+    <div class="content_items">
+        {% for i in range(10) %}
+        <div class="post-item">
+            {{ i }}
+        </div>
+        {% endfor %}
+
+        <!-- {% for t in ms %}
+        <div class="post-item">
+            <div class="topic_title_wrapper">
+                <a class="topic_title" href="{{ url_for('post.detail', id=t.id) }}">
+                    {{ t.title }}
+                </a>
+                <span>{{ t.replies() | count }} / {{ t.views }}</span>
+                {% if current_user.id %}
+                <a class="topic_title" href="{{ url_for('post.delete', id=t.id, token=token) }}">
+                    删除
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %} -->
+    </div>
+
+    <div class="pagination" current_page="1">
+        <ul>
+            <li><a>«</a></li>
+
+            <li><a>1</a></li>
+
+            <li><a href="#">2</a></li>
+
+            <li><a>...</a></li>
+            <li><a href="#">9</a></li>
+            <li><a href="#">10</a></li>
+
+            <li><a href="#">»</a></li>
+
+        </ul>
+    </div>
+</div>
+
+{% endblock %}

@@ -11,7 +11,7 @@ from app.routes import *
 from app.models.comment import Comment
 
 
-main = Blueprint('reply', __name__)
+main = Blueprint('comment', __name__)
 
 
 @main.route("/add", methods=["POST"])
@@ -23,5 +23,5 @@ def add():
     db.session.add(comment)
     db.session.commit()
 
-    return redirect(url_for('topic.detail', id=comment.post_id))
+    return redirect(url_for('post.detail', id=comment.post_id))
 

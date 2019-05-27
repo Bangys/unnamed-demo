@@ -144,7 +144,6 @@ blockquote p {
     border-radius: 4px;
 }
 
-
 /* 首页部分 */
 #middle {
     margin: 0 20%;
@@ -596,4 +595,50 @@ footer {
     -webkit-background-clip: text;
     background-image: -webkit-linear-gradient(left, #e74c3c 20%, #f4d03f 40%, #2ecc71 60%, #5dade2 80%, #a569bd 100%);
     background-image: linear-gradient(to right, #e74c3c 20%, #f4d03f 40%, #2ecc71 60%, #5dade2 80%, #a569bd 100%);
+}
+
+/* post部分 */
+.post_content {
+    border: 1px solid gray;
+}
+
+.post_content a {
+    color: #666;
+}
+.post-item{
+    margin: 10px auto;
+    outline: 1px solid #666;
+}
+.content_board {
+    background-color: lightblue;
+    padding: 10px;
+}
+
+.content_board a {
+    margin: 0 10px;
+}
+
+.topic-tab {
+    margin: 0 10px;
+}
+
+.topic-tab.current-tab {
+    background-color: #80bd01;
+    color: white;
+    padding: 3px 4px;
+    border-radius: 3px;
+}
+
+.topic-tab:hover {
+    text-decoration: none;
+}
+
+.pagination {
+    display: block;
+    margin: 1% auto;
+    text-align: center;
+}
+
+.pagination ul li {
+    display: inline-block;
 }

@@ -8,18 +8,10 @@ from flask import (
     flash)
 
 from app.models.user import User
+from app.routes import current_user
 from utils import log
 
 main = Blueprint('index', __name__)
-
-
-def current_user():
-    # 从 session 中找到 user_id 字段, 找不到就 -1
-    # 然后 User.find_by 来用 id 找用户
-    # 找不到就返回 None
-    uid = session.get('user_id', -1)
-    u = User.query.filter_by(id=uid).first()
-    return u
 
 
 """
