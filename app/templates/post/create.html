@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+
+<form id="create-post-form" method="post" action="{{ url_for('.add') }}">
+    <fieldset>
+        <input autofocus class='form-control' name='title' placeholder="标题字数 10 字以上" required></input>
+
+        <div class="create-post-board">
+            <span class="tab-selector">选择版块：</span>
+            <select id="board_id" name="board_id" class="selectpicker" required>
+                <option value="">请选择</option>
+                {% for b in bs %}
+                <option value="{{ b.id }}">{{ b.name }}</option>
+                {% endfor %}
+            </select>
+            <span class="board-msg"></span>
+        </div>
+
+        <div class='markdown_editor in_editor'>
+            <div class='markdown_in_editor'>
+                <textarea id="create-post-content" class='editor' name='content' rows='20' placeholder='文章支持 Markdown 语法, 请注意标记代码'></textarea>
+                <span class="content-msg"></span>
+                <div class='editor_buttons'>
+                    <button type="submit" class="btn btn-primary" onclick="post_check()">提交</button>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+
+</form>
+
+<link href="/static/css/simplemde.min.css" rel="stylesheet">
+<script src="/static/js/simplemde.min.js"></script>
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script> -->
+<script>
+    $(document).ready(function() {
+        var simplemde = new SimpleMDE({
+            element: $("#create-post-content")[0]
+        });
+
+        cn_obj = {
+            'Bold (Ctrl-B)': '加粗 (Ctrl-B)',
+            'Italic (Ctrl-I)': '斜体 (Ctrl-I)',
+            'Heading (Ctrl-H)': '标题 (Ctrl-H)',
+            "Quote (Ctrl-')": "引用 (Ctrl-')",
+            'Generic List (Ctrl-L)': '列表 (Ctrl-L)',
+            'Numbered List (Ctrl-Alt-L)': '有序列表 (Ctrl-Alt-L)',
+            'Create Link (Ctrl-K)': '链接 (Ctrl-K)',
+            'Insert Image (Ctrl-Alt-I)': '插入图片 (Ctrl-Alt-I)',
+            'Toggle Preview (Ctrl-P)': '预览 (Ctrl-P)',
+            'Toggle Side by Side (F9)': '分栏 (F9)',
+            'Toggle Fullscreen (F11)': '全屏 (F11)',
+            'Markdown Guide': '手册',
+
+        }
+        obj = $('.editor-toolbar a')
+        for (i = 0; i < obj.length; i++) {
+            obj[i].title = Object.values(cn_obj)[i]
+        }
+
+    })
+</script>
+
+{% endblock %}

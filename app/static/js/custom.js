@@ -1,11 +1,3 @@
-var initedEditor = function() {
-    var e = new Editor()
-    var element = $('.editor').get(0)
-    e.render(element)
-    return e
-}
-
-
 var trigger = $('.hamburger'),
     overlay = $('.overlay'),
     isClosed = false;
@@ -45,12 +37,19 @@ function validate() {
     }
 }
 
+function post_check() {
+    var board = $("#board_id option:selected").text();
+    if (board == '请选择') {
+        e(".board-msg").innerHTML = "<font color='red'>请选择</font>";
+        return false;
+    }
+}
 
 
 
 
 var __main = function() {
-    initedEditor()
+
 }
 
 

@@ -1,43 +1,44 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="post_content">
 
-    <div class="content_board">
-        <a href="/post" class="topic-tab current-tab">
-            全部
-        </a>
+{% include "post/sidebar.html" %}
+<div class="post-board">
+    <!-- <div class="post-board-img">
 
-        {% for b in bs %}
-        <a href="/post?board_name={{ b.name }}" class="topic-tab">
-            {{ b.title }}
-        </a>
-        {% endfor %}
-    </div>
+    </div> -->
+    <a href="/post" class="topic-tab current-tab">
+        <span class="btn btn-secondary">全部</span>
+    </a>
 
-    <br>
-    <div class="content_items">
-        {% for i in range(10) %}
+    {% for b in bs %}
+    <a href="/post?board_name={{ b.title }}" class="topic-tab">
+        <span class="btn btn-secondary">{{ b.name }}</span>
+
+    </a>
+    {% endfor %}
+</div>
+
+<hr>
+
+<div class="post-content">
+
+    <div class="content-items">
+
+        {% for post in posts %}
+
         <div class="post-item">
-            {{ i }}
-        </div>
-        {% endfor %}
-
-        <!-- {% for t in ms %}
-        <div class="post-item">
-            <div class="topic_title_wrapper">
-                <a class="topic_title" href="{{ url_for('post.detail', id=t.id) }}">
-                    {{ t.title }}
+                <a class="post_title" href="{{ url_for('post.detail', id=post.id) }}">
+                    {{ post.title }}
                 </a>
-                <span>{{ t.replies() | count }} / {{ t.views }}</span>
-                {% if current_user.id %}
-                <a class="topic_title" href="{{ url_for('post.delete', id=t.id, token=token) }}">
+                <span>{{ post.replies() | count }} / {{ post.views }}</span>
+                {% if session['user_id'] %}
+                <a class="post_title" href="{{ url_for('post.delete', id=post.id, token=token) }}">
                     删除
                 </a>
                 {% endif %}
-            </div>
         </div>
-        {% endfor %} -->
+        {% endfor %}
     </div>
 
     <div class="pagination" current_page="1">

@@ -6,6 +6,7 @@ class User(db.Model):
     __tablename__ = 'user'
 
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(32))
     username = db.Column(db.String(32))
     password = db.Column(db.String(128))
     ct = db.Column(db.DateTime, default=datetime.utcnow)
@@ -13,6 +14,7 @@ class User(db.Model):
 
     def __init__(self, form):
         self.id = form.get('id', None)
+        self.name = form.get('name', '')
         self.username = form.get('username', '')
         self.password = form.get('password', '')
         self.ct = datetime.utcnow()
@@ -32,7 +34,7 @@ class User(db.Model):
     def register(cls, form):
         name = form.get('username', '')
         pwd = form.get('password', '')
-        if len(name) > 2 and User.query.filter_by(username=name).first() is None:
+        if User.query.filter_by(username=name).first() is None:
             u = User(form)
             u.password = u.salted_password(pwd)
             db.session.add(u)

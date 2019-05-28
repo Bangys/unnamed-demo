@@ -17,8 +17,9 @@ class Post(db.Model):
     board_id = db.Column(db.Integer, db.ForeignKey('board.id', ondelete='CASCADE'))
 
     def __init__(self, form):
-        self.title = form.get('title')
-        self.content = form.get('content')
+        self.title = form.get('title', '')
+        self.content = form.get('content', '')
+        self.board_id = form.get('board_id', 1)
         self.ct = datetime.utcnow()
         self.ut = self.ct
 

@@ -29,7 +29,8 @@ def index():
     if board_name == '':
         posts = Post.query.all()
     else:
-        b = Board.query.filter_by(name=board_name).first()
+        b = Board.query.filter_by(title=board_name).first()
+        log('b', b)
         posts = Post.query.filter_by(board_id=b.id).all()
     token = str(uuid.uuid4())
     u = current_user()
@@ -37,7 +38,7 @@ def index():
     if u is not None:
         csrf_tokens['token'] = u.id
     bs = Board.query.all()
-    return render_template("post/post_index.html", ms=posts, token=token, bs=bs, board_name=board_name, current_user=u)
+    return render_template("post/post_index.html", posts=posts, token=token, bs=bs, board_name=board_name)
 
 
 @main.route('/<int:id>')
@@ -45,13 +46,12 @@ def detail(id):
     u = current_user()
     post = Post.query.filter_by(id=id).first()
     if post is None:
-        flash('文章不存在')
+        flash('文章不存在', 'warning')
         return redirect('/')
     post.click()
     board = Board.query.filter_by(id=post.board_id).first()
     author = User.query.filter_by(id=post.user_id).first()
     date = post.ct
-    # 传递 post 的所有 reply 到 页面中
     return render_template("post/detail.html", post=post, board=board, author=author, date=date, current_user=u)
 
 
@@ -59,8 +59,6 @@ def detail(id):
 def add():
     form = request.form
     u = current_user()
-    if u is None:
-        return redirect(url_for('index.signin'))
     post = Post(form)
     post.user_id = u.id
     db.session.add(post)
@@ -88,7 +86,7 @@ def delete():
 def new():
     u = current_user()
     if u is None:
-        flash('需要进行登陆')
-        return redirect(url_for('index.signin'))
+        flash('需要进行登陆', 'info')
+        return redirect(url_for('index.login'))
     bs = Board.query.all()
-    return render_template("post/new.html", bs=bs)
+    return render_template("post/create.html", bs=bs)

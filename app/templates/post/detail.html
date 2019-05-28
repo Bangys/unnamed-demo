@@ -1,105 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>bbs club</title>
-    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/css/style.css">
-    <link rel="stylesheet" href="/static/lib/editor/editor.css">
-    <link rel="stylesheet" href="/static/lib/webuploader/webuploader.css">
-    <script src="/static/lib/jquery-3.0.0.min.js"></script>
-    <script src="/static/lib/markdownit.js"></script>
-    <script src="/static/lib/webuploader/webuploader.withoutimage.js"></script>
-    <script src="/static/lib/editor/editor.js"></script>
-    <script src="/static/lib/editor/ext.js"></script>
+{% extends "base.html" %}
 
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+{% block content %}
 
-    <script>
-
-        $(document).ready(function () {
-            document.getElementById('editormd').innerHTML =
-                marked($('#editormd').text());
-        })
-    </script>
-
-    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/css/cnode-index.css">
-    <style>
-
-        @font-face {
-            font-family: 'my-pixel';
-            src: url('/static/PressStart2P.ttf');
-        }
-
-        .logo-1 {
-            font-family: my-pixel;
-            font-size: 24px;
-            color: #21e2ff;
-        }
-
-        .logo-2 {
-            font-family: my-pixel;
-            font-size: 24px;
-            color: #0d7377;
-
-        }
-    </style>
-</head>
-<body>
-<div class="navbar">
-    <div class="navbar-inner">
-        <div class="container">
-            <a class="brand" href="/">
-                <span class="logo-1">T<span class="logo-2">Sure</span></span>
-            </a>
-            <form id="search_form" class="navbar-search" action="/search">
-                <input type="text" id="q" name="q" class="search-query span3" value="" autocomplete="off">
-            </form>
-            <ul class="nav pull-right">
-                <li><a href="/topic">首页</a></li>
-                <li><a href="https://whochat.essayer.cc/">发现</a></li>
-                {% if current_user %}
-                    <li><a href="/logout">退出登陆</a></li>
-
-                {% else %}
-                    <li><a href="/signup">注册</a></li>
-                    <li><a href="/signin">登录</a></li>
-                {% endif %}
-
-
-            </ul>
-            <a class="btn btn-navbar" id="responsive-sidebar-trigger">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
-        </div>
-
-    </div>
-</div>
+{% include "post/sidebar.html" %}
 
 <div id="main">
     <div id="content">
         <div class='panel'>
             <div class='header topic_header'>
-        <span class="topic_full_title">
-			{{ post.title }}
-      	</span>
+                <span class="topic_full_title">
+                    {{ post.title }}
+                </span>
                 <div class="changes">
-            <span>
-                发布于{{ date }}
-            </span>
                     <span>
-                作者
-                {{ author.username }}
-        	</span>
+                        发布于{{ date }}
+                    </span>
                     <span>
-          	    {{ post.views }} 次浏览
-        	</span>
+                        作者
+                        {{ author.username }}
+                    </span>
                     <span>
-                来自 {{ board.name }}
-            </span>
+                        {{ post.views }} 次浏览
+                    </span>
+                    <span>
+                        来自 {{ board.name }}
+                    </span>
                 </div>
             </div>
 
@@ -117,51 +42,48 @@
 
         <div class='panel'>
             <div class='header'>
-            <span class='col_fade'>
-                <!-- 过滤器 -->
-                {{ post.replies() | count }} 回复
-            </span>
+                <span class='col_fade'>
+                    <!-- 过滤器 -->
+                    {{ post.replies() | count }} 回复
+                </span>
             </div>
             {% for r in post.replies() %}
-                <div class='cell reply_area reply_item'>
-                    <div class='author_content'>
-                        <a href="/user/leiwei1991" class="user_avatar">
-                            <img src=""
-                                 title="{{ r.user_id.username }}"/>
+            <div class='cell reply_area reply_item'>
+                <div class='author_content'>
+                    <a href="/user/leiwei1991" class="user_avatar">
+                        <img src="" title="{{ r.user_id.username }}" />
+                    </a>
+                    <div class='user_info'>
+                        <a class='dark reply_author'>
+                            {{ r.user_id.username }}
                         </a>
-                        <div class='user_info'>
-                            <a class='dark reply_author'>
-                                {{ r.user_id.username }}
-                            </a>
-                            <a class="reply_time">
-                                {{ loop.index }}楼
-                            </a>
-                        </div>
-                        <div class='user_action'>
-                    <span>
-                        <i class="fa up_btn
+                        <a class="reply_time">
+                            {{ loop.index }}楼
+                        </a>
+                    </div>
+                    <div class='user_action'>
+                        <span>
+                            <i class="fa up_btn
                           fa-thumbs-o-up
                           invisible" title="喜欢"></i>
-                        <span class="up-count">
+                            <span class="up-count">
+                            </span>
                         </span>
-                    </span>
-                        </div>
-                    </div>
-                    <div class='reply_content from-leiwei1991'>
-                        <div id="main_content" class="markdown-text">
-                            {{ r.content }}
-                        </div>
                     </div>
                 </div>
+                <div class='reply_content from-leiwei1991'>
+                    <div id="main_content" class="markdown-text">
+                        {{ r.content }}
+                    </div>
+                </div>
+            </div>
             {% endfor %}
             <div>
-                <form action="{{ url_for('reply.add') }}" method="post">
+                <form action="{{ url_for('comment.add') }}" method="post">
                     <input type="hidden" name="post_id" value="{{ post.id }}">
                     <textarea name="content"></textarea>
                     <button>添加回复</button>
                 </form>
             </div>
         </div>
-</body>
-
-</html>
+        {% endblock %}

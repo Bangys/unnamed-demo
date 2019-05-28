@@ -1,11 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="div-kanban-items">
+    {% for i in range(20) %}
+    <div class="kanban-item">
+    <img src="/static/oh.jpg" alt="{{ i }}">
 
-{% for i in range(10) %}
-<div class="div-kanban-item" >
-    {{ i }}
+    </div>
+
+    {% endfor %}
+
 </div>
-{% endfor %}
-
 {% endblock %}

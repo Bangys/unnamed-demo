@@ -235,12 +235,27 @@ blockquote p {
 }
 
 /* content部分 */
-.div-kanban-item {
-    width: 320px;
-    height: 320px;
-    margin: 10px;
-    border: 2px solid gray;
+.div-kanban-items {
+    width: 100%;
+    padding-right: 235px;
+}
+
+.kanban-item {
+    float: left;
+    width: 31%;
     display: inline-block;
+    height: 150px;
+    outline: 2px solid gray;
+    margin: 0 2% 2% 0;
+}
+
+.kanban-item:nth-child(10n+1) {
+    width: 97%;
+}
+
+.kanban-item img {
+    width: 100%;
+    height: 100%;
 }
 
 /*页脚*/
@@ -524,6 +539,11 @@ footer {
 }
 
 /* 表单 */
+.container {
+    width: 100%;
+    padding-left: 235px;
+}
+
 .row {
     margin: 12% 20%;
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -598,28 +618,59 @@ footer {
 }
 
 /* post部分 */
-.post_content {
-    border: 1px solid gray;
+.post-sidebar {
+    float: right;
+    width: 28%;
+    height: 200px;
+    padding: 0 2%;
 }
 
-.post_content a {
+
+.sidebar-bottom {
+    text-align: center;
+}
+
+.sidebar-bottom header{
+    background-color: lightblue;
+    font-size: 18px;
+}
+
+.sidebar-bottom article{
+
+    background-color: white;
+}
+.post-content {
+    border: 1px solid gray;
+    width: 70%;
+    display: inline-block;
+}
+
+.post-content a {
     color: #666;
 }
-.post-item{
-    margin: 10px auto;
-    outline: 1px solid #666;
+
+.post-item {
+    height: 40px;
 }
-.content_board {
+
+.post-item:nth-child(even) {
     background-color: lightblue;
-    padding: 10px;
 }
 
-.content_board a {
+.post-board {
+    float: left;
+    width: 70%;
+    background-color:#444;
+    border-radius: 6px;
+}
+
+.post-board a {
     margin: 0 10px;
 }
 
-.topic-tab {
-    margin: 0 10px;
+.post-board-img {
+    width: 400px;
+    height: 400px;
 }
 
 .topic-tab.current-tab {
@@ -641,4 +692,14 @@ footer {
 
 .pagination ul li {
     display: inline-block;
+}
+
+/* 创建文章 */
+.create-post-board {
+    width: 30%;
+    margin: 10px 0;
+}
+
+.CodeMirror .cm-spell-error:not(.cm-url):not(.cm-comment):not(.cm-tag):not(.cm-word) {
+    background-color: none !important;
 }

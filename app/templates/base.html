@@ -22,8 +22,8 @@
         </div>
 
         <div class="nav-top-right">
-            {% if user %}
-            <a class="nav-top-button" href="#"><i class="fab fa-dribbble"></i><span>我的</span></a>
+            {% if session['user_id'] %}
+            <a class="nav-top-button" href="/board/admin"><i class="fab fa-dribbble"></i><span>我的</span></a>
             <a class="nav-top-button" href="/logout"><i class="fas fa-sign-out-alt"></i><span>退出登陆</span></a>
             {% else %}
             <a class="nav-top-button" href="/register"><i class="fa fa-user-plus"></i><span>注册</span></a>
