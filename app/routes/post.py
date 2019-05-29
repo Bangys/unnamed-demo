@@ -30,7 +30,6 @@ def index():
         posts = Post.query.all()
     else:
         b = Board.query.filter_by(title=board_name).first()
-        log('b', b)
         posts = Post.query.filter_by(board_id=b.id).all()
     token = str(uuid.uuid4())
     u = current_user()

@@ -234,28 +234,17 @@ blockquote p {
     margin: 0 30%;
 }
 
-/* content部分 */
-.div-kanban-items {
+/* 首页轮播图部分 */
+.kanban-items {
     width: 100%;
-    padding-right: 235px;
+    outline: 1px solid red;
+    text-align: center;
 }
 
-.kanban-item {
-    float: left;
-    width: 31%;
+.kan-item {
+    outline: 1px solid blue;
+    width: 32%;
     display: inline-block;
-    height: 150px;
-    outline: 2px solid gray;
-    margin: 0 2% 2% 0;
-}
-
-.kanban-item:nth-child(10n+1) {
-    width: 97%;
-}
-
-.kanban-item img {
-    width: 100%;
-    height: 100%;
 }
 
 /*页脚*/
@@ -625,20 +614,19 @@ footer {
     padding: 0 2%;
 }
 
-
 .sidebar-bottom {
     text-align: center;
 }
 
-.sidebar-bottom header{
+.sidebar-bottom header {
     background-color: lightblue;
     font-size: 18px;
 }
 
-.sidebar-bottom article{
-
+.sidebar-bottom article {
     background-color: white;
 }
+
 .post-content {
     border: 1px solid gray;
     width: 70%;
@@ -660,7 +648,7 @@ footer {
 .post-board {
     float: left;
     width: 70%;
-    background-color:#444;
+    background-color: #444;
     border-radius: 6px;
 }
 

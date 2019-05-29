@@ -1,14 +1,38 @@
 {% extends "base.html" %}
 
+{% block head %}
+
+{{ super() }}
+
+<link rel="stylesheet" href="static/css/slide.css" />
+<script src="static/js/slide.js"></script>
+
+{% endblock %}
+
+
 {% block content %}
-<div class="div-kanban-items">
-    {% for i in range(20) %}
-    <div class="kanban-item">
-    <img src="/static/oh.jpg" alt="{{ i }}">
+<div id="slide" class="slide">
+    <ul>
+        <li><img src="static/oh1.jpg"></li>
+        <li><img src="static/oh1.jpg"></li>
+        <li><img src="static/oh1.jpg"></li>
+        <li><img src="static/oh1.jpg"></li>
+        <li><img src="static/oh1.jpg"></li>
+    </ul>
+    <div>
+        <span class="prev_btn"> &lt; </span>
+        <span class="next_btn"> &gt; </span>
+    </div>
+</div>
+
+<div class="kanban-items">
+    {% for i in range(9) %}
+    <div class="kan-item">
+        <img src="/static/oh.jpg" alt="{{ i }}">
 
     </div>
-
     {% endfor %}
 
 </div>
+
 {% endblock %}

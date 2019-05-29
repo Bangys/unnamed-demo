@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 
-{% include "head.html" %}
+<head>
+    {% block head %}
+    {% include "head.html" %}
+    {% endblock %}
+</head>
+
 
 <body>
 
