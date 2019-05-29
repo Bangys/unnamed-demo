@@ -7,12 +7,12 @@
     <!-- <div class="post-board-img">
 
     </div> -->
-    <a href="/post" class="topic-tab current-tab">
+    <a href="/post" class="post-tab current-tab">
         <span class="btn btn-secondary">全部</span>
     </a>
 
     {% for b in bs %}
-    <a href="/post?board_name={{ b.title }}" class="topic-tab">
+    <a href="/post?board_name={{ b.title }}" class="post-tab">
         <span class="btn btn-secondary">{{ b.name }}</span>
 
     </a>
@@ -28,35 +28,39 @@
         {% for post in posts %}
 
         <div class="post-item">
-                <a class="post_title" href="{{ url_for('post.detail', id=post.id) }}">
-                    {{ post.title }}
-                </a>
-                <span>{{ post.replies() | count }} / {{ post.views }}</span>
+            <a class="post-i-title" href="{{ url_for('post.detail', id=post.id) }}">
+                {{ post.title }}
+            </a>
+            <span class="post-i-info">{{ post.replies() | count }}评 / {{ post.views }}阅</span>
+
+            <span class="post-i-button">
                 {% if session['user_id'] %}
-                <a class="post_title" href="{{ url_for('post.delete', id=post.id, token=token) }}">
+                <a class="" href="{{ url_for('post.delete', id=post.id, token=token) }}">
                     删除
                 </a>
                 {% endif %}
+            </span>
         </div>
         {% endfor %}
     </div>
 
-    <div class="pagination" current_page="1">
-        <ul>
-            <li><a>«</a></li>
 
-            <li><a>1</a></li>
+</div>
+<div class="pagination" current_page="1">
+    <ul>
+        <li><a>«</a></li>
 
-            <li><a href="#">2</a></li>
+        <li><a>1</a></li>
 
-            <li><a>...</a></li>
-            <li><a href="#">9</a></li>
-            <li><a href="#">10</a></li>
+        <li><a href="#">2</a></li>
 
-            <li><a href="#">»</a></li>
+        <li><a>...</a></li>
+        <li><a href="#">9</a></li>
+        <li><a href="#">10</a></li>
 
-        </ul>
-    </div>
+        <li><a href="#">»</a></li>
+
+    </ul>
 </div>
 
 {% endblock %}

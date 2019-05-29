@@ -564,12 +564,13 @@ footer {
 .controls {
     width: 50%;
 }
-
+.btn{
+    border-radius: 0;
+}
 .btn-primary {
     border: none;
     background-color: #1da1f2;
     border-color: #1da1f2;
-    border-radius: 65px;
     transition: box-shadow .15s ease-in-out;
 }
 
@@ -606,6 +607,14 @@ footer {
     background-image: linear-gradient(to right, #e74c3c 20%, #f4d03f 40%, #2ecc71 60%, #5dade2 80%, #a569bd 100%);
 }
 
+/* 统一盒子阴影 */
+.sidebar-bottom,
+.post-content,
+.post-board
+ {
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.14), 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+}
+
 /* post部分 */
 .post-sidebar {
     float: right;
@@ -614,6 +623,13 @@ footer {
     padding: 0 2%;
 }
 
+.sidebar-top{
+    text-align: center;
+
+}
+.sidebar-top a span {
+    margin: 10px 0;
+}
 .sidebar-bottom {
     text-align: center;
 }
@@ -628,28 +644,25 @@ footer {
 }
 
 .post-content {
-    border: 1px solid gray;
+    background-color: white;
     width: 70%;
     display: inline-block;
-}
-
-.post-content a {
-    color: #666;
+    outline: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .post-item {
-    height: 40px;
+    border-top: 1px solid #e0e0e0;
+    height: 42px;
 }
 
-.post-item:nth-child(even) {
-    background-color: lightblue;
-}
-
+/* 斑马线 */
+/* .post-item:nth-child(even) {
+    background-color: #f1f1f1;
+} */
 .post-board {
     float: left;
     width: 70%;
-    background-color: #444;
-    border-radius: 6px;
+    background-color: #555;
 }
 
 .post-board a {
@@ -661,25 +674,47 @@ footer {
     height: 400px;
 }
 
-.topic-tab.current-tab {
-    background-color: #80bd01;
-    color: white;
+.post-tab.current-tab {
+    background-color: #e0e0e0;
+    color: #555;
     padding: 3px 4px;
-    border-radius: 3px;
 }
 
-.topic-tab:hover {
+.post-tab :hover {
     text-decoration: none;
+}
+
+.post-i-title {
+    margin-left: 10px;
+    font-size: 1.3em;
+    color: #4982ae;
+}
+
+.post-i-info {
+    float: right;
+    margin-right: 0.5%;
+}
+
+.post-i-button a {
+    color: #a94442;
+}
+
+.post-i-button a:hover {
+    text-decoration: underline;
 }
 
 .pagination {
     display: block;
-    margin: 1% auto;
+    margin: 1% 0 0 0;
     text-align: center;
 }
 
 .pagination ul li {
     display: inline-block;
+}
+
+.pagination ul li a {
+    color: #555;
 }
 
 /* 创建文章 */
