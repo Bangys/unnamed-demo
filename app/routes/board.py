@@ -30,7 +30,6 @@ def index():
 @main.route("/add", methods=["POST"])
 def add():
     form = request.form
-    log('add', form)
     u = current_user()
     name = form.get('name', '')
     title = form.get('title', '')
@@ -45,3 +44,15 @@ def add():
     db.session.commit()
     flash('添加板块成功', 'success')
     return redirect(url_for('.index'))
+
+
+@main.route("/pull/<int:flag>")
+def pull(flag):
+    if flag == 1:
+        from spider.book import main
+        main()
+        flash('爬取数据成功', 'success')
+        return redirect(url_for('.index'))
+    else:
+        flash('出现问题, 请到后台查询', 'danger')
+        return redirect(url_for('.index'))
