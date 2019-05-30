@@ -7,15 +7,31 @@
     <!-- <div class="post-board-img">
 
     </div> -->
+
+
+    <!-- 笨方法 先用着 -->
+    {% if board_name == '' %}
     <a href="/post" class="post-tab current-tab">
         <span class="btn btn-secondary">全部</span>
     </a>
+    {% else %}
+    <a href="/post" class="post-tab ">
+        <span class="btn btn-secondary">全部</span>
+    </a>
+    {% endif %}
+
 
     {% for b in bs %}
+
+    {% if b.title == board_name %}
+    <a href="/post?board_name={{ b.title }}" class="post-tab current-tab">
+        <span class="btn btn-secondary">{{ b.name }}</span>
+    </a>
+    {% else %}
     <a href="/post?board_name={{ b.title }}" class="post-tab">
         <span class="btn btn-secondary">{{ b.name }}</span>
-
     </a>
+    {% endif %}
     {% endfor %}
 </div>
 

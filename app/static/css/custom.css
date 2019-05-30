@@ -138,10 +138,23 @@ blockquote p {
     text-align: center;
 }
 
+@keyframes rotate {
+    0% {
+        opacity: 1;
+    }
+
+
+    100% {
+        opacity: 0;
+    }
+}
+
 .alert {
     padding: 7px;
     border: 1px solid rgba(0, 0, 0, 0.88);
     border-radius: 4px;
+    animation: rotate 5s;
+    animation-fill-mode: forwards;
 }
 
 /* 首页部分 */
@@ -382,7 +395,6 @@ footer {
     line-height: 44px;
 }
 
-
 .nav .open>a {
     background-color: transparent;
 }
@@ -409,7 +421,6 @@ footer {
     cursor: pointer;
     transition: 0.4s all;
 }
-
 
 .sidebar-menu-child {
     margin-top: 4px !important;
@@ -495,8 +506,6 @@ footer {
         box-shadow: 0 0 0 0.15em #c0392b;
     }
 }
-
-
 
 /*-------------------------------*/
 /*       Hamburger-Cross         */
@@ -775,7 +784,7 @@ footer {
     height: 400px;
 }
 
-.post-tab.current-tab {
+.current-tab {
     background-color: #e0e0e0;
     color: #555;
     padding: 3px 4px;
