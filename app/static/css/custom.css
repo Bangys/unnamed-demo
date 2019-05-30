@@ -345,7 +345,6 @@ footer {
 .sidebar-nav li a {
     color: #dddddd;
     display: block;
-    padding: 10px 15px 10px 30px;
     text-decoration: none;
 }
 
@@ -382,6 +381,122 @@ footer {
     height: 65px;
     line-height: 44px;
 }
+
+
+.nav .open>a {
+    background-color: transparent;
+}
+
+.nav .open>a:hover {
+    background-color: transparent;
+}
+
+.nav .open>a:focus {
+    background-color: transparent;
+}
+
+.sidebar-menu {
+    width: auto;
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-menu>li {
+    color: #fff;
+    padding: 10px 15px;
+    margin-top: 8px;
+    /* border-left: 0.1em groove #555; */
+    cursor: pointer;
+    transition: 0.4s all;
+}
+
+
+.sidebar-menu-child {
+    margin-top: 4px !important;
+    text-indent: 20px;
+}
+
+.unread {
+    float: right;
+    background: #e74c3c;
+    width: 2em;
+    border-radius: 50%;
+    font-size: 0.75em;
+    line-height: 2;
+    text-align: center;
+    animation: notificationpulse 1s infinite;
+    -webkit-animation: notificationpulse 1s infinite;
+    -moz-animation: notificationpulse 1s infinite;
+}
+
+/*the animations */
+@keyframes notificationpulse {
+    0% {
+        box-shadow: 0 0 0 0.00em #c0392b;
+    }
+
+    25% {
+        box-shadow: 0 0 0 0.25em #c0392b;
+    }
+
+    50% {
+        box-shadow: 0 0 0 0.50em #c0392b;
+    }
+
+    75% {
+        box-shadow: 0 0 0 0.25em #c0392b;
+    }
+
+    100% {
+        box-shadow: 0 0 0 0.15em #c0392b;
+    }
+}
+
+@-webkit-keyframes notificationpulse {
+    0% {
+        box-shadow: 0 0 0 0.00em #c0392b;
+    }
+
+    25% {
+        box-shadow: 0 0 0 0.25em #c0392b;
+    }
+
+    50% {
+        box-shadow: 0 0 0 0.50em #c0392b;
+    }
+
+    75% {
+        box-shadow: 0 0 0 0.25em #c0392b;
+    }
+
+    100% {
+        box-shadow: 0 0 0 0.15em #c0392b;
+    }
+}
+
+@-moz-keyframes notificationpulse {
+    0% {
+        box-shadow: 0 0 0 0.00em #c0392b;
+    }
+
+    25% {
+        box-shadow: 0 0 0 0.25em #c0392b;
+    }
+
+    50% {
+        box-shadow: 0 0 0 0.50em #c0392b;
+    }
+
+    75% {
+        box-shadow: 0 0 0 0.25em #c0392b;
+    }
+
+    100% {
+        box-shadow: 0 0 0 0.15em #c0392b;
+    }
+}
+
+
 
 /*-------------------------------*/
 /*       Hamburger-Cross         */
@@ -511,22 +626,6 @@ footer {
     opacity: 1;
 }
 
-.nav .open>a {
-    background-color: transparent;
-}
-
-.nav .open>a:hover {
-    background-color: transparent;
-}
-
-.nav .open>a:focus {
-    background-color: transparent;
-}
-
-.dropdown-menu li {
-    text-indent: 10px;
-}
-
 /* 表单 */
 .container {
     width: 100%;
@@ -564,9 +663,11 @@ footer {
 .controls {
     width: 50%;
 }
-.btn{
+
+.btn {
     border-radius: 0;
 }
+
 .btn-primary {
     border: none;
     background-color: #1da1f2;
@@ -610,8 +711,7 @@ footer {
 /* 统一盒子阴影 */
 .sidebar-bottom,
 .post-content,
-.post-board
- {
+.post-board {
     box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.14), 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 1px 3px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -623,13 +723,14 @@ footer {
     padding: 0 2%;
 }
 
-.sidebar-top{
+.sidebar-top {
     text-align: center;
-
 }
+
 .sidebar-top a span {
     margin: 10px 0;
 }
+
 .sidebar-bottom {
     text-align: center;
 }
