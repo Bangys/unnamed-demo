@@ -47,7 +47,7 @@
             <a class="post-i-title" href="{{ url_for('post.detail', id=post.id) }}">
                 {{ post.title }}
             </a>
-            <span class="post-i-info">{{ post.replies() | count }}评 / {{ post.views }}阅</span>
+            <span class="post-i-info">{{ post.comments() | count }}评 / {{ post.views }}阅</span>
 
             <span class="post-i-button">
                 {% if session['user_id'] %}

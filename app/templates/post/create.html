@@ -15,26 +15,26 @@
             </select>
             <span class="board-msg"></span>
         </div>
-
-        <div class='markdown_editor in_editor'>
-            <div class='markdown_in_editor'>
                 <textarea id="create-post-content" class='editor' name='content' rows='20' placeholder='文章支持 Markdown 语法, 请注意标记代码'></textarea>
                 <span class="content-msg"></span>
                 <div class='editor_buttons'>
                     <button type="submit" class="btn btn-primary" onclick="post_check()">提交</button>
                 </div>
-            </div>
-        </div>
     </fieldset>
 
 
 </form>
 
-<link href="/static/css/simplemde.min.css" rel="stylesheet">
-<script src="/static/js/simplemde.min.js"></script>
-
 <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
 <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script> -->
+
+
+{% endblock %}
+
+
+{% block bottombody %}
+<link href="/static/css/simplemde.min.css" rel="stylesheet">
+<script src="/static/js/simplemde.min.js"></script>
 <script>
     $(document).ready(function() {
         var simplemde = new SimpleMDE({
@@ -63,5 +63,4 @@
 
     })
 </script>
-
 {% endblock %}

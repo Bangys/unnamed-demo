@@ -1,89 +1,115 @@
 {% extends "base.html" %}
 
+{% block head %}
+{{ super() }}
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+{% endblock %}
+
+
 {% block content %}
 
 {% include "post/sidebar.html" %}
 
-<div id="main">
-    <div id="content">
-        <div class='panel'>
-            <div class='header topic_header'>
-                <span class="topic_full_title">
-                    {{ post.title }}
-                </span>
-                <div class="changes">
-                    <span>
-                        发布于{{ date }}
-                    </span>
-                    <span>
-                        作者
-                        {{ author.username }}
-                    </span>
-                    <span>
-                        {{ post.views }} 次浏览
-                    </span>
-                    <span>
-                        来自 {{ board.name }}
-                    </span>
-                </div>
-            </div>
+<div class="post-detail">
 
-            <div class='inner topic'>
-                <div class='topic_content'>
-                    <div id="editormd">
-                        <div class="markdown-text">
+    <div class='detail-header'>
+        <h1 class="header-title">
+            {{ post.title }}
+        </h1>
 
-                            {{ post.content }}
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+        <div class="header-info">
+
+            <p class="header-basic-p">
+                <span class="header-basic-p-span">板块</span>
+                <a class="header-basic-p-a">{{ board.name }}</a>
+            </p>
+
+            <p class="header-basic-p">
+                <span class="header-basic-p-span">楼主</span>
+                <a class="header-basic-p-a"> {{ author.username or 'Mr.R'}}</a>
+            </p>
+
+            <p class="header-basic-p">
+                <span class="header-basic-p-span">热度</span>
+                <a class="header-basic-p-a">{{ post.views }}</a>
+            </p>
         </div>
 
-        <div class='panel'>
-            <div class='header'>
-                <span class='col_fade'>
-                    <!-- 过滤器 -->
-                    {{ post.replies() | count }} 回复
-                </span>
-            </div>
-            {% for r in post.replies() %}
-            <div class='cell reply_area reply_item'>
-                <div class='author_content'>
-                    <a href="/user/leiwei1991" class="user_avatar">
-                        <img src="" title="{{ r.user_id.username }}" />
+        <p class="header-basic-date">
+            时间:{{ date }}
+        </p>
+    </div>
+    <hr>
+
+
+    <div class='detail-content'>
+        <p id="content-md">{{ post.content }}</p>
+    </div>
+    <hr>
+
+
+    <div class="detail-comment-show">
+        <p class="header-basic-p">
+            <span class="header-basic-p-span">评论</span>
+            <a class="header-basic-p-a">{{ post.comments() | count }} </a>
+        </p>
+        {% for r in post.comments() %}
+        <div class="comment-item">
+            <div class='comment-info'>
+
+                <div class='comment-user'>
+                    <img class="comment-user-img"></img>
+                    <a class="comment-number">
+                        {{ r.user.username }}
                     </a>
-                    <div class='user_info'>
-                        <a class='dark reply_author'>
-                            {{ r.user_id.username }}
-                        </a>
-                        <a class="reply_time">
-                            {{ loop.index }}楼
-                        </a>
-                    </div>
-                    <div class='user_action'>
-                        <span>
-                            <i class="fa up_btn
-                          fa-thumbs-o-up
-                          invisible" title="喜欢"></i>
-                            <span class="up-count">
-                            </span>
-                        </span>
-                    </div>
+
+                    <a class="comment-number">
+                        {{ loop.index }}楼
+                    </a>
+
                 </div>
-                <div class='reply_content from-leiwei1991'>
-                    <div id="main_content" class="markdown-text">
-                        {{ r.content }}
-                    </div>
+
+
+            </div>
+            <div id="comment-content">
+                <div class="comment-content-text">
+                    {{ r.content }}
                 </div>
+
+                <p class="header-basic-date">
+                    {{ r.ut }}
+                </p>
             </div>
-            {% endfor %}
-            <div>
-                <form action="{{ url_for('comment.add') }}" method="post">
-                    <input type="hidden" name="post_id" value="{{ post.id }}">
-                    <textarea name="content"></textarea>
-                    <button>添加回复</button>
-                </form>
-            </div>
+
         </div>
-        {% endblock %}
+        {% endfor %}
+    </div>
+
+    <hr>
+    <div class="detail-comment-edit">
+        <form action="{{ url_for('comment.add') }}" method="post">
+            <input type="hidden" name="post_id" value="{{ post.id }}">
+            <textarea id="comment-edit-content" class="form-control" name="content" required></textarea>
+            <button class="btn">添加回复</button>
+            <!-- <span id="comment-add-md" class="btn btn-info">Markdown模式</span> -->
+            <span id="comment-edit-reset" class="btn  btn-warning">重置</span>
+        </form>
+    </div>
+
+
+    {% endblock %}
+
+
+
+    {% block bottombody %}
+    <script>
+        document.getElementById('content-md').innerHTML = marked($('#content-md').text())
+        $('#comment-edit-reset').click(function(event) {
+            $('#comment-edit-content').val("")
+
+        })
+    </script>
+
+    {% endblock %}

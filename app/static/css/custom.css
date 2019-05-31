@@ -143,7 +143,6 @@ blockquote p {
         opacity: 1;
     }
 
-
     100% {
         opacity: 0;
     }
@@ -158,93 +157,12 @@ blockquote p {
 }
 
 /* 首页部分 */
-#middle {
-    margin: 0 20%;
-}
-
 .index-images {
     text-align: center;
     margin: 30px auto;
     height: 500px;
     width: 100%;
     border: 1px solid rgba(0, 0, 0, 0.88);
-}
-
-.header-title {
-    font-family: 'Roboto Slab', 'Monda', "PingFang SC", "Microsoft YaHei", sans-serif;
-    font-size: 28px;
-    font-weight: 400;
-    color: #444;
-    margin: 0;
-}
-
-.header-title a:hover {
-    text-decoration: none;
-}
-
-.header-title h2 {
-    /* font-size: 1.2em; */
-}
-
-#index-description {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-#index-summary {
-    text-align: center;
-    margin: 20px 0;
-}
-
-.content section {
-    display: block;
-    /* background: #F5F7F9; */
-    /* border: 1px solid gray; */
-    /* border-radius: 8px; */
-    /* box-shadow: 2px 1px 6px; */
-    line-height: 3em;
-    padding: 3%;
-    margin: 0 10%;
-}
-
-.content section header {
-    text-align: center;
-}
-
-.content section p {
-    line-height: 1.3em;
-    margin: 0;
-}
-
-.header-basic-p {
-    display: inline-block;
-    margin-right: 5px;
-    margin: 0;
-}
-
-.header-basic-p-span {
-    padding: 2px 10px 2px 8px;
-    border-radius: 3px 0 0 3px;
-    color: #fff;
-    background-color: #666;
-}
-
-.header-basic-p-a {
-    padding: 1px 6px;
-    background-color: #fafafa;
-    border: 1px solid #c5c5c5;
-    text-decoration: none;
-    margin-left: -5px
-}
-
-.header-basic-p-a:hover {
-    color: #000000;
-}
-
-.hr-home {
-    border: 0;
-    border-top: 1.5px solid #000;
-    margin: 0 30%;
 }
 
 /* 首页轮播图部分 */
@@ -720,6 +638,7 @@ footer {
 /* 统一盒子阴影 */
 .sidebar-bottom,
 .post-content,
+.post-detail,
 .post-board {
     box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.14), 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 1px 3px 0 rgba(0, 0, 0, 0.2);
 }
@@ -753,7 +672,8 @@ footer {
     background-color: white;
 }
 
-.post-content {
+.post-content,
+.post-detail {
     background-color: white;
     width: 70%;
     display: inline-block;
@@ -836,4 +756,107 @@ footer {
 
 .CodeMirror .cm-spell-error:not(.cm-url):not(.cm-comment):not(.cm-tag):not(.cm-word) {
     background-color: none !important;
+}
+
+/* 文章详情页 */
+.post-detail a {
+    color: #666;
+}
+
+.detail-header {
+    text-align: center;
+}
+
+.header-title {
+    /* font-family: 'Roboto Slab', 'Monda', "PingFang SC", "Microsoft YaHei", sans-serif; */
+    /* font-size: 28px; */
+    /* font-weight: 400; */
+    margin: 20px 20px 10px 20px;
+    color: #444;
+}
+
+.header-title a:hover {
+    text-decoration: none;
+}
+
+.header-basic-p {
+    display: inline-block;
+    margin-right: 5px;
+    margin: 0;
+}
+
+.header-basic-date {
+    display: inline-block;
+    float: right;
+    margin: 0 20px;
+}
+
+.header-basic-p-span {
+    padding: 2px 10px 2px 8px;
+    border-radius: 3px 0 0 3px;
+    color: #fff;
+    background-color: #666;
+}
+
+.header-basic-p-a {
+    color: #666;
+    padding: 1px 6px;
+    background-color: #fafafa;
+    border: 1px solid #c5c5c5;
+    text-decoration: none;
+    margin-left: -5px
+}
+
+.header-basic-p-a:hover {
+    color: #000000;
+}
+
+.detail-content,
+.detail-comment-edit {
+    margin: 30px;
+}
+
+.detail-content a {
+    color: #49b1d3;
+}
+
+/* 评论区 */
+.detail-comment-show {
+    margin: 0 30px;
+}
+
+.detail-comment-edit textarea {
+    resize: none
+}
+
+.comment-item {
+    margin: 20px 0;
+    border-top: 1px solid #eee;
+}
+
+.comment-info {
+    display: inline-block;
+    text-align: center;
+    margin-top: 10px;
+    width: 15%;
+}
+
+#comment-content {
+    height: 100%;
+    display: inline-block;
+    width: 84%;
+}
+
+.comment-user {
+    /* width: 100px; */
+}
+
+.comment-number {
+    display: block;
+}
+
+.comment-user-img {
+    width: 30px;
+    height: 30px;
+    background-color: gray;
 }

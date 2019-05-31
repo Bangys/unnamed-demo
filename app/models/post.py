@@ -31,7 +31,7 @@ class Post(db.Model):
             log(e)
         return
 
-    def replies(self):
+    def comments(self):
         from .comment import Comment
         comments = Comment.query.filter_by(post_id=self.id).all()
         return comments

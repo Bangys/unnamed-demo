@@ -30,6 +30,7 @@ def index():
         posts = Post.query.all()
     else:
         b = Board.query.filter_by(title=board_name).first()
+        log('b', b)
         posts = Post.query.filter_by(board_id=b.id).all()
     token = str(uuid.uuid4())
     u = current_user()
@@ -58,10 +59,14 @@ def detail(id):
 def add():
     form = request.form
     u = current_user()
+    if u is None:
+        flash('需要进行登陆', 'info')
+        return redirect(url_for('index.login'))
     post = Post(form)
     post.user_id = u.id
     db.session.add(post)
     db.session.commit()
+    flash('提交成功', 'success')
     return redirect(url_for('.detail', id=post.id))
 
 
