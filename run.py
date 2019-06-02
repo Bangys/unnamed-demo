@@ -5,7 +5,7 @@ from app.models.post import Post
 from app.models.user import User
 from app.models.comment import Comment
 
-from spider.book import SpiderBook
+from spider import *
 
 
 app = create_app('default')

@@ -53,6 +53,14 @@ def pull(flag):
         main()
         flash('爬取数据成功', 'success')
         return redirect(url_for('.index'))
+
+    elif flag == 2:
+        from spider.game import main
+        main()
+        flash('爬取数据成功', 'success')
+        return redirect(url_for('.index'))
+
     else:
         flash('出现问题, 请到后台查询', 'danger')
         return redirect(url_for('.index'))
+

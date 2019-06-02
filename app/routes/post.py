@@ -30,7 +30,6 @@ def index():
         posts = Post.query.all()
     else:
         b = Board.query.filter_by(title=board_name).first()
-        log('b', b)
         posts = Post.query.filter_by(board_id=b.id).all()
     token = str(uuid.uuid4())
     u = current_user()
@@ -73,7 +72,6 @@ def add():
 @main.route("/delete")
 def delete():
     id = int(request.args.get('id'))
-    log('args', request.args)
     token = request.args.get('token')
     u = current_user()
     # 判断 token 是否是我们给的

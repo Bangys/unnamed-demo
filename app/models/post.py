@@ -10,6 +10,8 @@ class Post(db.Model):
     views = db.Column(db.Integer, default=0)
     title = db.Column(db.String(64))
     content = db.Column(db.Text)
+    # 主页图
+    image_url = db.Column(db.String(64))
     ct = db.Column(db.DateTime, default=datetime.utcnow)
     ut = db.Column(db.DateTime)
 
@@ -20,7 +22,8 @@ class Post(db.Model):
         self.title = form.get('title', '')
         self.content = form.get('content', '')
         self.board_id = form.get('board_id', 1)
-        self.ct = datetime.utcnow()
+        self.image_url = form.get('image_url', '')
+        self.ct = form.get('ct', datetime.utcnow())
         self.ut = self.ct
 
     def click(self):
