@@ -156,27 +156,42 @@ blockquote p {
     animation-fill-mode: forwards;
 }
 
-/* 首页部分 */
-.index-images {
-    text-align: center;
-    margin: 30px auto;
-    height: 500px;
-    width: 100%;
-    border: 1px solid rgba(0, 0, 0, 0.88);
-}
 
 /* 首页轮播图部分 */
-.kanban-items {
+.slide-li-div {
+    position: relative;
+    min-height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.div-kanban-items {
     width: 100%;
-    outline: 1px solid red;
     text-align: center;
 }
 
-.kan-item {
-    outline: 1px solid blue;
-    width: 32%;
+.kan-img {
+    width: 28%;
+    margin: 1% 2%;
+    height: 300px;
     display: inline-block;
+    background-size: cover;
+    background-position: center center;
 }
+.kan-img a{
+    display: block;
+
+}
+.kan-title {
+    position: relative;
+    top: 260px;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 10px 0 10px 0;
+    color: #000;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
 
 /*页脚*/
 footer {
@@ -759,6 +774,12 @@ footer {
 }
 
 /* 文章详情页 */
+
+#content-md img{
+    max-width: 100%;
+    max-height: 50%;
+
+}
 .post-detail a {
     color: #666;
 }

@@ -6,13 +6,15 @@ from flask import (
     url_for,
     Blueprint,
     flash)
+from sqlalchemy import or_, and_
 
+from app.models.board import Board
+from app.models.post import Post
 from app.models.user import User
 from app.routes import current_user
 from utils import log
 
 main = Blueprint('index', __name__)
-
 
 """
 用户登录后, 会写入 session, 并且定向到 /profile
@@ -22,7 +24,17 @@ main = Blueprint('index', __name__)
 @main.route("/")
 def index():
     user = current_user()
-    return render_template("index.html", user=user)
+    board_name = 'games'
+    b = Board.query.filter_by(title=board_name).first()
+
+    if b is None:
+        flash('板块验证出错', 'danger')
+        return redirect(url_for('post.index'))
+
+    posts = Post.query.filter(and_(Post.image_url != 'noimage',
+                                   Post.board_id == b.id)
+                              ).limit(14)
+    return render_template("index.html", user=user, posts=posts)
 
 
 @main.route("/register", methods=['GET', 'POST'])

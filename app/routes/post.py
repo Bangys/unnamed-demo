@@ -28,11 +28,11 @@ def index():
     page = request.args.get('page', 1, type=int)
     per_page = 20
     if board_name == '':
-        pagination = Post.query.order_by('id desc').paginate(page, per_page=per_page)
+        pagination = Post.query.order_by(Post.id.desc()).paginate(page, per_page=per_page)
     else:
         b = Board.query.filter_by(title=board_name).first()
         # posts = Post.query.filter_by(board_id=b.id).all()
-        pagination = Post.query.filter_by(board_id=b.id).order_by('id desc').paginate(page, per_page=per_page)
+        pagination = Post.query.filter_by(board_id=b.id).order_by(Post.ct.desc()).paginate(page, per_page=per_page)
     posts = pagination.items
 
     token = str(uuid.uuid4())

@@ -13,11 +13,15 @@
 {% block content %}
 <div id="slide" class="slide">
     <ul>
-        <li><img src="static/oh1.jpg"></li>
-        <li><img src="static/oh1.jpg"></li>
-        <li><img src="static/oh1.jpg"></li>
-        <li><img src="static/oh1.jpg"></li>
-        <li><img src="static/oh1.jpg"></li>
+        {% for p in posts[:5] %}
+        <li>
+            <div class="slide-li-div">
+                <a href="/post/{{ p.id }}"> <img src={{ p.image_url[15:] }} alt="{{ p.title }}"></a>
+                <p class='slide-title'>{{ p.title }}</p>
+            </div>
+        </li>
+
+        {% endfor %}
     </ul>
     <div>
         <span class="prev_btn"> &lt; </span>
@@ -25,12 +29,13 @@
     </div>
 </div>
 
-<div class="kanban-items">
-    {% for i in range(9) %}
-    <div class="kan-item">
-        <img src="/static/oh.jpg" alt="{{ i }}">
-
+<div class="div-kanban-items">
+    {% for p in posts[5:] %}
+    <div class="kan-img" style="background-image:url({{ p.image_url[15:] }})">
+        <a class="kan-title" href="/post/{{ p.id }}">{{ p.title }}</a>
     </div>
+
+
     {% endfor %}
 
 </div>
