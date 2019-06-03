@@ -31,7 +31,6 @@ def index():
         pagination = Post.query.order_by(Post.id.desc()).paginate(page, per_page=per_page)
     else:
         b = Board.query.filter_by(title=board_name).first()
-        # posts = Post.query.filter_by(board_id=b.id).all()
         pagination = Post.query.filter_by(board_id=b.id).order_by(Post.id.desc()).paginate(page, per_page=per_page)
     posts = pagination.items
 
@@ -39,10 +38,10 @@ def index():
     # 防csrf
     u = current_user()
     if u is not None:
-        csrf_tokens['token'] = u.id
+        csrf_tokens[token] = u.id
     bs = Board.query.all()
     return render_template("post/post_index.html", posts=posts, pagination=pagination, token=token, bs=bs,
-                           board_name=board_name)
+                           board_name=board_name, user=u)
 
 
 @main.route('/<int:id>')
@@ -78,15 +77,17 @@ def add():
 def delete():
     id = int(request.args.get('id'))
     token = request.args.get('token')
+    post = Post.query.filter_by(id=id).first()
     u = current_user()
-    # 判断 token 是否是我们给的
-    # if token in csrf_tokens and csrf_tokens[token] == u.id:
-    Post.query.filter_by(id=id).delete()
-    db.session.commit()
-    return redirect(url_for('.index'))
-
-    # else:
-    # abort(403)
+    # 判断 token
+    if token in csrf_tokens and csrf_tokens[token] == u.id and (post.user_id == u.id or u.id == 1):
+        Post.query.filter_by(id=id).delete()
+        db.session.commit()
+        flash('删除成功', 'success')
+        return redirect(url_for('.index'))
+    else:
+        flash('没有权限进行该操作', 'warning')
+        return redirect('/')
 
 
 @main.route("/new")

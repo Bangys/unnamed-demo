@@ -50,7 +50,7 @@
             <span class="post-i-info">{{ post.comments() | count }}评 / {{ post.views }}阅</span>
 
             <span class="post-i-button">
-                {% if session['user_id'] %}
+                {% if user.id == post.user_id or user.id == 1 %}
                 <a class="" href="{{ url_for('post.delete', id=post.id, token=token) }}">
                     删除
                 </a>
