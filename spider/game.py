@@ -13,11 +13,13 @@ from utils import safe_commit
 
 
 # 页面缓存
-def cached_url(url):
+def cached_url(url, flag):
     item = SpiderGame.query.filter_by(url=url).first()
 
     if item is not None:
-        return item.base_html
+        print('have cache')
+        flag = True
+        return item.base_html, flag
     else:
         item = SpiderGame()
         item.url = url
@@ -27,13 +29,17 @@ def cached_url(url):
         base_html = requests.get(url, headers).content
         item.base_html = base_html
         safe_commit(item)
-        return item.base_html
+        return item.base_html, flag
 
 
 # 处理单个url
 def news_from_url(url):
-    site_url = "http://127.0.0.1:5000/"
-    base_html = cached_url(url)
+    site_url = "http://127.0.0.1:5000"
+    flag = False
+    base_html = cached_url(url, flag)
+    # 是否有缓存
+    if flag is False:
+        sleep(random() * 10)
     e = pq(base_html)
     p_list = e('article .topicContent p').text()
     title = e('.art_tit').text()
@@ -67,7 +73,6 @@ def news_from_url(url):
 # 处理url列表
 def news_from_urllist(url_list):
     for url in url_list:
-        sleep(random() * 10)
         news_from_url(url)
         print('第{}个完成'.format(url_list.index(url)))
     return
@@ -82,6 +87,7 @@ def newslist_from_url(url):
     items = e('.news')[-1]
 
     times = pq(items[-1])('.time_box').text()
+    print('times before', times)
     while times != '1天前':
         sleep(0.5)
         browser.find_element_by_id('topicList_more').click()
@@ -89,7 +95,7 @@ def newslist_from_url(url):
         e = pq(browser.page_source)
         items = e('.news')[-1]
         times = pq(items[-1])('.time_box').text()
-
+        print('times after', times)
     e = pq(browser.page_source)
     news = e('.news')
     url_list = [pre_url + pq(i)('.info_box a').attr('href') for i in news]

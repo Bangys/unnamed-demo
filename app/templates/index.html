@@ -16,7 +16,7 @@
         {% for p in posts[:5] %}
         <li>
             <div class="slide-li-div">
-                <a href="/post/{{ p.id }}"> <img src={{ p.image_url[15:] }} alt="{{ p.title }}"></a>
+                <a href="/post/{{ p.id }}"> <img src={{ p.image_url }} alt="{{ p.title }}"></a>
                 <p class='slide-title'>{{ p.title }}</p>
             </div>
         </li>
@@ -31,7 +31,7 @@
 
 <div class="div-kanban-items">
     {% for p in posts[5:] %}
-    <div class="kan-img" style="background-image:url({{ p.image_url[15:] }})">
+    <div class="kan-img" style="background-image:url({{ p.image_url }})">
         <a class="kan-title" href="/post/{{ p.id }}">{{ p.title }}</a>
     </div>
 
