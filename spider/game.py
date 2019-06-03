@@ -13,14 +13,14 @@ from utils import safe_commit
 
 
 # 页面缓存
-def cached_url(url, flag):
+def cached_url(url):
     item = SpiderGame.query.filter_by(url=url).first()
 
     if item is not None:
-        print('have cache')
-        flag = True
-        return item.base_html, flag
+        # print('have cache')
+        return item.base_html, True
     else:
+        # print('no cache')
         item = SpiderGame()
         item.url = url
         headers = {
@@ -29,18 +29,17 @@ def cached_url(url, flag):
         base_html = requests.get(url, headers).content
         item.base_html = base_html
         safe_commit(item)
-        return item.base_html, flag
+        return item.base_html, False
 
 
 # 处理单个url
 def news_from_url(url):
     site_url = "http://127.0.0.1:5000"
-    flag = False
-    base_html = cached_url(url, flag)
+    base_html = cached_url(url)
     # 是否有缓存
-    if flag is False:
+    if base_html[1] is False:
         sleep(random() * 10)
-    e = pq(base_html)
+    e = pq(base_html[0])
     p_list = e('article .topicContent p').text()
     title = e('.art_tit').text()
     time = e('.time_box').text()
@@ -79,23 +78,23 @@ def news_from_urllist(url_list):
 
 
 # 从首页获取数据url列表
-def newslist_from_url(url):
+def newslist_from_url(url, day):
     pre_url = 'http://www.vgtime.com'
     browser = webdriver.Chrome()
     browser.get(url)
+    sleep(3)
     e = pq(browser.page_source)
     items = e('.news')[-1]
 
+
     times = pq(items[-1])('.time_box').text()
-    print('times before', times)
-    while times != '1天前':
+    while times != day:
         sleep(0.5)
         browser.find_element_by_id('topicList_more').click()
 
         e = pq(browser.page_source)
         items = e('.news')[-1]
         times = pq(items[-1])('.time_box').text()
-        print('times after', times)
     e = pq(browser.page_source)
     news = e('.news')
     url_list = [pre_url + pq(i)('.info_box a').attr('href') for i in news]
@@ -115,6 +114,7 @@ def download_image(url):
         os.makedirs(folder)
 
     if os.path.exists(path):
+        # print('img have cache')
         return path.replace(os.sep, '/')[3:]
 
     headers = {
@@ -128,7 +128,9 @@ def download_image(url):
 
 def main():
     url = 'http://www.vgtime.com/topic/index.jhtml'
+    # 抓取多少天的数据
+    day = '{}天前'.format(4)
     try:
-        newslist_from_url(url)
+        newslist_from_url(url, day)
     except Exception as e:
         print('games main', e)

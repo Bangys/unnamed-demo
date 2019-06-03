@@ -17,13 +17,23 @@ def create_app(config_name):
 
     with app.app_context():
         db.create_all()
-    """
-    在 flask 中，模块化路由的功能由 蓝图（Blueprints）提供
-    蓝图可以拥有自己的静态资源路径、模板路径（现在还没涉及）
-    用法如下
-    """
-    # 注册蓝图
-    # 有一个 url_prefix 可以用来给蓝图中的每个路由加一个前缀
+
+        from app.models.board import Board
+        bs = Board.query.all()
+        if bs == []:
+            init_boards = [{'title': 'news', 'name': '新闻'},
+                           {'title': 'games', 'name': '游戏'},
+                           {'title': 'books', 'name': '好书'},
+                           {'title': 'bala', 'name': '闲聊'}]
+
+            for b in init_boards:
+                db.session.add(Board(b))
+            try:
+                db.session.commit()
+            except Exception as e:
+                print('init_board err:', e)
+
+    # url_prefix 路由前缀
     from app.routes.index import main as index_routes
     from app.routes.post import main as post_routes
     from app.routes.comment import main as comment_routes

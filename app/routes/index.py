@@ -33,7 +33,7 @@ def index():
 
     posts = Post.query.filter(and_(Post.image_url != 'noimage',
                                    Post.board_id == b.id)
-                              ).order_by(Post.ct.desc()).limit(14)
+                              ).order_by(Post.id.desc()).limit(14)
     return render_template("index.html", user=user, posts=posts)
 
 

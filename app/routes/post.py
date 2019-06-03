@@ -32,7 +32,7 @@ def index():
     else:
         b = Board.query.filter_by(title=board_name).first()
         # posts = Post.query.filter_by(board_id=b.id).all()
-        pagination = Post.query.filter_by(board_id=b.id).order_by(Post.ct.desc()).paginate(page, per_page=per_page)
+        pagination = Post.query.filter_by(board_id=b.id).order_by(Post.id.desc()).paginate(page, per_page=per_page)
     posts = pagination.items
 
     token = str(uuid.uuid4())
