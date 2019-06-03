@@ -16,6 +16,15 @@
 
 ## 简介
 一个Python3+Flask搭建的样式偏冷系的论坛系统，具备基本功能:登陆/注册/发帖/评论，侧边栏菜单、首页轮播图，后续会加入更多工具类的功能
+
+### 界面
+<p align="center">
+  <img src="https://github.com/Bangys/tsure_bbs/blob/master/app/static/show1.jpg">
+  <img src="https://github.com/Bangys/tsure_bbs/blob/master/app/static/show2.jpg">
+  <img src="https://github.com/Bangys/tsure_bbs/blob/master/app/static/show3.jpg">
+</p>
+
+
 ## 使用
 ### 依赖环境
 后续更新requirements.txt(建议使用虚拟环境安装)
@@ -56,7 +65,9 @@ python run.py
 ```
 
 ## 版本记录
-### v0.2
+### v0.2 
+`2019-06-03`
+
 - 新增
   - 数据抓取：豆瓣、VGtime
   - 首页轮播图、九宫格布局
@@ -66,6 +77,7 @@ python run.py
   - 加入部分CSS3动画
 
 ### v0.1
+`2019-05-19`
 - 页面部分
   - 首页 index
   - 文章详情页 detail
