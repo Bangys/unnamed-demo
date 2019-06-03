@@ -62,20 +62,40 @@
 
 
 </div>
-<div class="pagination" current_page="1">
-    <ul>
-        <li><a>«</a></li>
 
-        <li><a>1</a></li>
 
-        <li><a href="#">2</a></li>
+<div class="pagination">
+    <ul class="pagination">
+        <li{% if not pagination.has_prev %} class="disabled" {% endif %}>
+            <a href="{% if pagination.has_prev %}{{ url_for('post.index', page=pagination.page-1, board_name=board_name)}}{% else %}#{% endif %}">&laquo;
+            </a>
+            </li>
 
-        <li><a>...</a></li>
-        <li><a href="#">9</a></li>
-        <li><a href="#">10</a></li>
+            {% for p in pagination.iter_pages() %}
+            {% if p %}
 
-        <li><a href="#">»</a></li>
+            <!-- 当前页 -->
+            {% if p == pagination.page %}
+            <li class="active">
+                <a href="{{ url_for('post.index', page = p,  board_name=board_name) }}">{{ p}}</a>
+            </li>
+            {% else %}
+            <li>
+                <a href="{{ url_for('post.index', page = p,  board_name=board_name) }}">{{ p }}</a>
+            </li>
+            {% endif %}
 
+            {% else %}
+            <li class="disabled"><a href="#">&hellip;</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+
+            <li{% if not pagination.has_next %} class="disabled" {% endif %}>
+                <a href="{% if pagination.has_next %}{{ url_for('post.index', page=pagination.page+1, board_name=board_name) }}{% else %}#{% endif %}">
+                    &raquo;
+                </a>
+                </li>
     </ul>
 </div>
 

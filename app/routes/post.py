@@ -24,20 +24,25 @@ csrf_tokens = dict()
 
 @main.route("/")
 def index():
-    u = current_user()
     board_name = request.args.get('board_name', '')
+    page = request.args.get('page', 1, type=int)
+    per_page = 20
     if board_name == '':
-        posts = Post.query.all()
+        pagination = Post.query.order_by('id desc').paginate(page, per_page=per_page)
     else:
         b = Board.query.filter_by(title=board_name).first()
-        posts = Post.query.filter_by(board_id=b.id).all()
+        # posts = Post.query.filter_by(board_id=b.id).all()
+        pagination = Post.query.filter_by(board_id=b.id).order_by('id desc').paginate(page, per_page=per_page)
+    posts = pagination.items
+
     token = str(uuid.uuid4())
-    u = current_user()
     # 防csrf
+    u = current_user()
     if u is not None:
         csrf_tokens['token'] = u.id
     bs = Board.query.all()
-    return render_template("post/post_index.html", posts=posts, token=token, bs=bs, board_name=board_name)
+    return render_template("post/post_index.html", posts=posts, pagination=pagination, token=token, bs=bs,
+                           board_name=board_name)
 
 
 @main.route('/<int:id>')
