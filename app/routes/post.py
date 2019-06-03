@@ -1,4 +1,5 @@
 import time
+from random import randint
 
 from flask import (
     render_template,
@@ -98,3 +99,9 @@ def new():
         return redirect(url_for('index.login'))
     bs = Board.query.all()
     return render_template("post/create.html", bs=bs)
+
+
+@main.route("/random")
+def post_random():
+    num = randint(1, Post.query.count())
+    return redirect(url_for('.detail', id=num))
