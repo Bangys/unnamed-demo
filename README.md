@@ -27,7 +27,30 @@
 
 ## 使用
 ### 依赖环境
-后续更新requirements.txt(建议使用虚拟环境安装)
+在目录下使用pip安装`pip install -r requirements.txt`, 建议在虚拟环境下安装
+```
+certifi==2019.3.9
+chardet==3.0.4
+Click==7.0
+cssselect==1.0.3
+dominate==2.3.5
+Flask==1.0.3
+Flask-Bootstrap==3.3.7.1
+Flask-SQLAlchemy==2.4.0
+idna==2.8
+itsdangerous==1.1.0
+Jinja2==2.10.1
+lxml==4.3.3
+MarkupSafe==1.1.1
+PyMySQL==0.9.3
+pyquery==1.4.0
+requests==2.22.0
+selenium==3.141.0
+SQLAlchemy==1.3.4
+urllib3==1.25.3
+visitor==0.1.3
+Werkzeug==0.15.4
+```
 ### 配置文件
 需要配置数据库地址, 在根目录下的`config.py`中, 替换`SQLALCHEMY_DATABASE_URI`：
 ```
