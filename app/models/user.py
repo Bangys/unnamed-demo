@@ -8,6 +8,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(32))
     username = db.Column(db.String(32))
+    email = db.Column(db.String(32))
     password = db.Column(db.String(128))
     ct = db.Column(db.DateTime, default=datetime.utcnow)
     ut = db.Column(db.DateTime)
@@ -16,6 +17,7 @@ class User(db.Model):
         self.id = form.get('id', None)
         self.name = form.get('name', '')
         self.username = form.get('username', '')
+        self.email = form.get('email', '')
         self.password = form.get('password', '')
         self.ct = datetime.utcnow()
         self.ut = self.ct

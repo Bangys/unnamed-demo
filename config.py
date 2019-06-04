@@ -13,7 +13,8 @@ class Config:
     # MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     # FLASKY_MAIL_SUBJECT_PREFIX = '[Flasky]'
     # FLASKY_MAIL_SENDER = 'Flasky Admin <flasky@example.com>'
-    # FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN')
+    FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN') or 'admin'
+    FLASKY_PWD = os.environ.get('FLASKY_PWD') or 'admin'
     # SSL_REDIRECT = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SALT = 'your salt'
@@ -33,6 +34,13 @@ class DevelopmentConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:123456@localhost/tsure'
 
 
+class TestingConfig(Config):
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:123456@localhost/test_tsure'
+    WTF_CSRF_ENABLED = False
+
+
 config = {
-    'default': DevelopmentConfig
+    'default': DevelopmentConfig,
+    'testing': TestingConfig,
 }

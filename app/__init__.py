@@ -2,6 +2,7 @@ from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 from config import config
+from config import Config as CF
 from utils import log
 
 bootstrap = Bootstrap()
@@ -19,12 +20,17 @@ def create_app(config_name):
         db.create_all()
 
         from app.models.board import Board
+        from app.models.user import User
         bs = Board.query.all()
         if bs == []:
             init_boards = [{'title': 'news', 'name': '新闻'},
                            {'title': 'games', 'name': '游戏'},
                            {'title': 'books', 'name': '好书'},
                            {'title': 'bala', 'name': '闲聊'}]
+
+            init_user = dict(username=CF.FLASKY_ADMIN, email='admin@example.com',
+                             password=CF.FLASKY_PWD)
+            db.session.add(User(init_user))
 
             for b in init_boards:
                 db.session.add(Board(b))

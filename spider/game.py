@@ -126,11 +126,11 @@ def download_image(url):
     return path.replace(os.sep, '/')[3:]
 
 
-def main():
+def main(day):
     url = 'http://www.vgtime.com/topic/index.jhtml'
-    # 抓取多少天的数据
-    day = '{}天前'.format(4)
+    num = '{}天前'.format(day)
+    print('开始抓取{}数据'.format(num))
     try:
-        newslist_from_url(url, day)
+        newslist_from_url(url, num)
     except Exception as e:
         print('games main', e)

@@ -55,8 +55,9 @@ def pull(flag):
         return redirect('/')
 
     elif flag == 2:
+        day = request.args.get('day', 1, type=int)
         from spider.game import main
-        main()
+        main(day)
         flash('爬取数据成功', 'success')
         print('Done')
         return redirect('/')
