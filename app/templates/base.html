@@ -28,7 +28,10 @@
 
         <div class="nav-top-right">
             {% if session['user_id'] %}
-            <a class="nav-top-button" href="/board/admin"><i class="fab fa-dribbble"></i><span>我的</span></a>
+            {% if session['user_id'] == 1 %}
+            <a class="nav-top-button" href="/board/admin"><i class="fab fa-dribbble"></i><span>板块管理</span></a>
+            {% endif %}
+            <a class="nav-top-button" href="/profile"><i class="fab fa-dribbble"></i><span>我的</span></a>
             <a class="nav-top-button" href="/logout"><i class="fas fa-sign-out-alt"></i><span>退出登陆</span></a>
             {% else %}
             <a class="nav-top-button" href="/register"><i class="fa fa-user-plus"></i><span>注册</span></a>

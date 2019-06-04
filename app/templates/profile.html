@@ -1,16 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>profile</title>
-</head>
-<body>
-    <h1>用户资料页面</h1>
-    <div>
-        {{ user.id }}
-    </div>
-    <div>
-        {{ user.name }}
-    </div>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+
+    <form class="form-group" method="post" action="{{ url_for('.profile_change') }}">
+        <h1 class="control-label">修改个人资料</h1>
+        <div class="control-group">
+            <label class="control-label">昵称</label>
+            <div class="controls">
+                <input type="text" class="form-control" name="name" value="{{ user.name }}" required>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">用户名</label>
+            <div class="controls">
+                <input type="text" class="form-control" name="username" value="{{ user.username }}" disabled>
+            </div>
+        </div>
+
+        <label class="control-label">邮箱</label>
+        <div class="controls">
+            <input type="email" class="form-control" name="email" value="{{ user.email }}">
+        </div>
+
+
+        <div class="control-group">
+            <label class="control-label">原密码</label>
+            <div class="controls">
+                <input id="pw-1" type="password" class="form-control" name="old-password" required>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">新密码</label>
+            <div class="controls">
+                <input id="pw-2" type="password" class="form-control" name="password" required>
+            </div>
+            <span id="password-msg"></span>
+        </div>
+        <input type="hidden" name="id" value="{{ user.id }}">
+        <button id="submit" type="submit" class="btn btn-primary">确认修改</button>
+
+    </form>
+</div>
+
+{% endblock %}

@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import (
     render_template,
     request,
@@ -12,13 +13,10 @@ from app.models.board import Board
 from app.models.post import Post
 from app.models.user import User
 from app.routes import current_user
-from utils import log
+from utils import log, safe_commit
+from app import db
 
 main = Blueprint('index', __name__)
-
-"""
-用户登录后, 会写入 session, 并且定向到 /profile
-"""
 
 
 @main.route("/")
@@ -82,6 +80,7 @@ def logout():
 def profile():
     u = current_user()
     if u is None:
+        flash('个人页面需要登录后显示', 'warning')
         return redirect(url_for('.index'))
     else:
         return render_template('profile.html', user=u)
@@ -90,3 +89,28 @@ def profile():
 @main.route('/search')
 def search():
     return render_template('404.html')
+
+
+@main.route("/profile-up", methods=['POST'])
+def profile_change():
+    form = request.form
+    person = User.query.filter_by(id=form.get('id', -1)).first()
+    oldpwd = form.get('old-password', '')
+    if person.password != person.salted_password(oldpwd):
+        flash('修改失败：原始密码输入错误', 'danger')
+        return redirect(url_for('.profile'))
+    person.name = form.get('name', '')
+    person.email = form.get('email', '')
+    person.password = person.salted_password(form.get('password', ''))
+    person.ut = datetime.utcnow()
+
+    try:
+        db.session.add(person)
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        flash('修改失败：{}'.format(e), 'danger')
+        return redirect(url_for('.profile'))
+
+    flash('修改成功', 'success')
+    return redirect(url_for('.profile'))
