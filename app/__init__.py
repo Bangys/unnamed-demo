@@ -28,9 +28,8 @@ def create_app(config_name):
                            {'title': 'books', 'name': '好书'},
                            {'title': 'bala', 'name': '闲聊'}]
 
-            init_user = dict(username=CF.FLASKY_ADMIN, email='admin@example.com',
-                             password=CF.FLASKY_PWD)
-            db.session.add(User(init_user))
+            User.register(dict(username=CF.FLASKY_ADMIN, email='admin@example.com',
+                               password=CF.FLASKY_PWD))
 
             for b in init_boards:
                 db.session.add(Board(b))
